@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Password Generator</string>
+
+    <string name="title">Генератор паролей</string>
+    <string name="password_length">Длина пароля</string>
+    <string name="default_length">12</string>
+
+    <string name="settings">Настройки</string>
+    <string name="uppercase">Заглавные буквы</string>
+    <string name="lowercase">Строчные буквы</string>
+    <string name="numbers">Цифры</string>
+    <string name="symbols">Спецсимволы</string>
+
+    <string name="generate">СГЕНЕРИРОВАТЬ</string>
+    <string name="your_password">Ваш пароль</string>
+</resources>

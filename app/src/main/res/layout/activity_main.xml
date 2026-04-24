@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Заголовок -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/app_name"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- Длина пароля -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_length">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="@string/default_length"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Настройки -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"/>
+
+        <CheckBox
+            android:id="@+id/cbUpper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uppercase"
+            android:checked="true"/>
+
+        <CheckBox
+            android:id="@+id/cbLower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lowercase"
+            android:checked="true"/>
+
+        <CheckBox
+            android:id="@+id/cbNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numbers"
+            android:checked="true"/>
+
+        <CheckBox
+            android:id="@+id/cbSymbols"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/symbols"
+            android:checked="true"/>
+
+        <!-- Кнопка -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24px"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/selectAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="450px"
+                android:text="Выбрать всё" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="450px"
+                android:text="Инвертировать" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGenerate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/generate"
+            android:layout_marginTop="24dp"
+            app:cornerRadius="16dp"/>
+
+        <!-- Результат -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_password"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="custom"
+            app:endIconDrawable="@android:drawable/ic_menu_copy">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:textSize="18sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Заголовок карточки -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="История паролей"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:background="?attr/colorPrimaryContainer"/>
+
+                <!-- Таблица -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1"
+                    android:padding="8dp">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/light_purple"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:text="#"
+                            android:textStyle="bold"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="Пароль"
+                            android:textStyle="bold"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="Длина"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:gravity="center"/>
+                    </TableRow>
+
+                    <!-- Строка 1 -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:text="1"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:id="@+id/password1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="—"
+                            android:padding="8dp"
+                            android:textIsSelectable="true"
+                            android:fontFamily="monospace"/>
+
+                        <TextView
+                            android:id="@+id/password1Len"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="0"
+                            android:padding="8dp"
+                            android:gravity="center"/>
+                    </TableRow>
+
+                    <!-- Строка 2 -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:text="2"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:id="@+id/password2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="—"
+                            android:padding="8dp"
+                            android:textIsSelectable="true"
+                            android:fontFamily="monospace"/>
+
+                        <TextView
+                            android:id="@+id/password2Len"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="0"
+                            android:padding="8dp"
+                            android:gravity="center"/>
+                    </TableRow>
+
+                    <!-- Строка 3 -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:text="3"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:id="@+id/password3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="—"
+                            android:padding="8dp"
+                            android:textIsSelectable="true"
+                            android:fontFamily="monospace"/>
+
+                        <TextView
+                            android:id="@+id/password3Len"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="0"
+                            android:padding="8dp"
+                            android:gravity="center"/>
+                    </TableRow>
+
+                    <!-- Строка 4 -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:text="4"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:id="@+id/password4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="—"
+                            android:padding="8dp"
+                            android:textIsSelectable="true"
+                            android:fontFamily="monospace"/>
+
+                        <TextView
+                            android:id="@+id/password4Len"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="0"
+                            android:padding="8dp"
+                            android:gravity="center"/>
+                    </TableRow>
+                </TableLayout>
+
+                <!-- Кнопка очистки истории -->
+                <Button
+                    android:id="@+id/clearHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Очистить историю"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_gravity="end"
+                    android:layout_margin="8dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>
