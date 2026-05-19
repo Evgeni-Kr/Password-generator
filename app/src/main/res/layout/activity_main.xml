@@ -44,33 +44,40 @@
             android:textSize="18sp"
             android:layout_marginTop="24dp"/>
 
-        <CheckBox
-            android:id="@+id/cbUpper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/uppercase"
-            android:checked="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/checkboxes">
+            <CheckBox
+                android:id="@+id/cbUpper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/uppercase"
+                android:checked="true"/>
 
-        <CheckBox
-            android:id="@+id/cbLower"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lowercase"
-            android:checked="true"/>
+            <CheckBox
+                android:id="@+id/cbLower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lowercase"
+                android:checked="true"/>
 
-        <CheckBox
-            android:id="@+id/cbNumbers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/numbers"
-            android:checked="true"/>
+            <CheckBox
+                android:id="@+id/cbNumbers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numbers"
+                android:checked="true"/>
 
-        <CheckBox
-            android:id="@+id/cbSymbols"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/symbols"
-            android:checked="true"/>
+            <CheckBox
+                android:id="@+id/cbSymbols"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/symbols"
+                android:checked="true"/>
+        </LinearLayout>
+
 
         <!-- Кнопка -->
 
@@ -89,7 +96,7 @@
                 android:text="Выбрать всё" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/invertBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -118,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="custom"
-            app:endIconDrawable="@android:drawable/ic_menu_copy">
+            app:endIconDrawable="@drawable/ic_copy">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etResult"

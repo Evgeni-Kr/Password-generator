@@ -1,35 +1,13 @@
-//package com.example.colors;
-//
-//import android.os.Bundle;
-//import android.widget.TextView;
-//
-//import androidx.activity.EdgeToEdge;
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//public class MainActivity extends AppCompatActivity {
-//
-//    TextView title;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        EdgeToEdge.enable(this);
-//        setContentView(R.layout.activity_main);
-//
-//        initTextViews();
-//    }
-//
-//    private void initTextViews(){
-//        title = findViewById(R.id.title);
-//    }
-//}
 package com.example.colors;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
     CheckBox cbSymbols;
 
     Button selectAll;
-    Button button5;
+    Button invertBtn;
     Button clearHistory;
+    LinearLayout checkboxes;
 
     MaterialButton btnGenerate;
 
@@ -87,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
 
         title = findViewById(R.id.title);
+        checkboxes = findViewById(R.id.checkboxes);
 
         etLength = findViewById(R.id.etLength);
         etResult = findViewById(R.id.etResult);
@@ -97,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         cbSymbols = findViewById(R.id.cbSymbols);
 
         selectAll = findViewById(R.id.selectAll);
-        button5 = findViewById(R.id.button5);
+        invertBtn = findViewById(R.id.invertBtn);
 
         clearHistory = findViewById(R.id.clearHistory);
 
@@ -116,26 +96,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void initButtons() {
 
-        // Генерация пароля
-        btnGenerate.setOnClickListener(v -> generatePassword());
+        btnGenerate.setOnClickListener(v -> pass_to_etResult_history(generatePassword()));
 
-        // Выбрать всё
         selectAll.setOnClickListener(v -> {
-            cbUpper.setChecked(true);
-            cbLower.setChecked(true);
-            cbNumbers.setChecked(true);
-            cbSymbols.setChecked(true);
+            for (int i = 0; i < checkboxes.getChildCount(); i++) {
+                View child = checkboxes.getChildAt(i);
+                if (child instanceof CheckBox) {
+                    ((CheckBox) child).setChecked(true);
+                }
+            }
         });
 
-        // Инвертировать
-        button5.setOnClickListener(v -> {
-            cbUpper.setChecked(!cbUpper.isChecked());
-            cbLower.setChecked(!cbLower.isChecked());
-            cbNumbers.setChecked(!cbNumbers.isChecked());
-            cbSymbols.setChecked(!cbSymbols.isChecked());
+        invertBtn.setOnClickListener(v -> {
+            for (int i = 0; i < checkboxes.getChildCount(); i++) {
+                View child = checkboxes.getChildAt(i);
+                if (child instanceof CheckBox) {
+                    ((CheckBox) child).setChecked(!((CheckBox) child).isChecked());
+                }
+            }
         });
 
-        // Очистить историю
         clearHistory.setOnClickListener(v -> {
             history.clear();
             updateHistory();
@@ -145,20 +125,18 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
-        // Копирование результата
         etResult.setOnClickListener(v -> copyPassword());
     }
 
-    // Генерация пароля
-    private void generatePassword() {
+    private String generatePassword() {
 
-        String lenText = etLength.getText().toString();
+        String lenText = etLength.getText() == null ? "" : etLength.getText().toString();
 
         if (lenText.isEmpty()) {
             Toast.makeText(this,
                     "Введите длину",
                     Toast.LENGTH_SHORT).show();
-            return;
+            return "";
         }
 
         int length = Integer.parseInt(lenText);
@@ -185,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     "Выберите хотя бы один тип символов",
                     Toast.LENGTH_SHORT).show();
-            return;
+            return "";
         }
 
         SecureRandom random = new SecureRandom();
@@ -193,25 +171,17 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder password = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
-
             int index = random.nextInt(chars.length());
-
             password.append(chars.charAt(index));
         }
 
-        String result = password.toString();
-
-        etResult.setText(result);
-
-        addToHistory(result);
+        return password.toString();
     }
 
-    // Добавление в историю
-    private void addToHistory(String password) {
+    private void pass_to_etResult_history(String pass){
+        etResult.setText(pass);
+        history.add(0, pass);
 
-        history.add(0, password);
-
-        // Максимум 4 записи
         if (history.size() > 4) {
             history.remove(4);
         }
@@ -219,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
         updateHistory();
     }
 
-    // Обновление таблицы истории
     private void updateHistory() {
 
         TextView[] passwords = {
@@ -256,10 +225,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Копирование в буфер
     private void copyPassword() {
 
-        String password = etResult.getText().toString();
+        String password = etResult.getText() == null ? "" : etResult.getText().toString();
 
         if (password.isEmpty()) {
 
